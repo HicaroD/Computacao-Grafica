@@ -39,9 +39,7 @@ class Drawer:
         glClear(GL_COLOR_BUFFER_BIT)
         glLoadIdentity()
         gluOrtho2D(-1, 1, -1, 1)
-
         self.draw_flag()
-
         glFlush()
 
     def run(self) -> None:
