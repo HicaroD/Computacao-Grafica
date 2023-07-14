@@ -1,13 +1,3 @@
-# Primeira atividade de OpenGL
+# Computação Gráfica
 
-## Pré-requisitos
-
-1. pygame
-2. PyOpenGL
-3. PyOpenGL_accelerate
-
-Basta rodar o seguinte comando no terminal: `pip install pygame PyOpenGL PyOpenGL_accelerate`
-
-## Uso
-
-TODO.
+Meu repositório para armazenar minhas atividades da matéria "Computação Gráfica".
