@@ -33,9 +33,9 @@ class Drawer:
     def draw_flag(self):
         glBegin(GL_QUADS)
 
-        self.scale(2, 2)
-        # self.rotate(45, counterclockwise=True)
-        self.translate(3, 3)
+        # self.translate(2, 3)
+        self.scale(1.5, 1.5)
+        self.rotate(45)
 
         self._draw_green_background()
         self._draw_yellow_diamond()
@@ -48,7 +48,7 @@ class Drawer:
             [0, 0, 1],
         ]
         self._translate_green_background(translation_matrix)
-        self._translate_yellow_background(translation_matrix)
+        self._translate_yellow_diamond(translation_matrix)
 
     def _translate_green_background(self, translation_matrix):
         translated_matrix = []
@@ -58,7 +58,7 @@ class Drawer:
             translated_matrix.append(result)
         self.green_background_vertexes = translated_matrix
 
-    def _translate_yellow_background(self, translation_matrix):
+    def _translate_yellow_diamond(self, translation_matrix):
         translated_matrix = []
         for vertex in self.yellow_diamond_vertexes:
             result = numpy.matmul(translation_matrix, vertex)
@@ -93,7 +93,7 @@ class Drawer:
             rotated_matrix.append(result)
         self.yellow_diamond_vertexes = rotated_matrix
 
-    def scale(self, x: int, y: int):
+    def scale(self, x: float, y: float):
         scaling_matrix = [
             [x, 0, 0],
             [0, y, 0],
