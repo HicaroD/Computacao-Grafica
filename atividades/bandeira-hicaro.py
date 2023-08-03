@@ -35,7 +35,7 @@ class Drawer:
 
         self.scale(2, 2)
         # self.rotate(45, counterclockwise=True)
-        self.translate(10, 10)
+        self.translate(3, 3)
 
         self._draw_green_background()
         self._draw_yellow_diamond()
@@ -53,7 +53,7 @@ class Drawer:
     def _translate_green_background(self, translation_matrix):
         translated_matrix = []
         for vertex in self.green_background_vertexes:
-            result = numpy.matmul(vertex, translation_matrix)
+            result = numpy.matmul(translation_matrix, vertex)
             print(result)
             translated_matrix.append(result)
         self.green_background_vertexes = translated_matrix
@@ -61,7 +61,7 @@ class Drawer:
     def _translate_yellow_background(self, translation_matrix):
         translated_matrix = []
         for vertex in self.yellow_diamond_vertexes:
-            result = numpy.matmul(vertex, translation_matrix)
+            result = numpy.matmul(translation_matrix, vertex)
             translated_matrix.append(result)
         self.yellow_diamond_vertexes = translated_matrix
 
