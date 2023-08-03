@@ -8,32 +8,36 @@ SCREEN_HEIGHT = 600
 
 class Drawer:
     def __init__(self) -> None:
+        # TODO: add to separate init function
         glutInit()
         glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
         glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT)
         glutCreateWindow("Brazilian Flag")
 
-    def _draw_green_background(self):
-        glColor3f(0, 0.5, 0)
-        vertexes = [
+        self.green_background_vertexes = [
             (-0.5, -0.5),
             (-0.5, 0.5),
             (0.5, 0.5),
             (0.5, -0.5),
         ]
-        for vertex in vertexes:
-            glVertex2f(vertex[0], vertex[1])
-
-    def _draw_yellow_diamond(self):
-        glColor3f(1, 1, 0)
-
-        vertexes = [
+        self.yellow_diamond_vertexes = [
             (-0.5, 0),
             (0, 0.5),
             (0.5, 0),
             (0, -0.5),
         ]
-        for vertex in vertexes:
+
+    def scale(self):
+        pass
+
+    def _draw_green_background(self):
+        glColor3f(0, 0.5, 0)
+        for vertex in self.green_background_vertexes:
+            glVertex2f(vertex[0], vertex[1])
+
+    def _draw_yellow_diamond(self):
+        glColor3f(1, 1, 0)
+        for vertex in self.yellow_diamond_vertexes:
             glVertex2f(vertex[0], vertex[1])
 
     def draw_flag(self):
