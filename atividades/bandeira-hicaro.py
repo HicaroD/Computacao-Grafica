@@ -142,18 +142,13 @@ class Drawer:
                 self.rotate(2)
             case pg.K_LCTRL:
                 self.scale(1.5, 1.5)
-            case pg.K_MINUS:
-                self.scale(-1.5, -1.5)
+            case pg.K_RCTRL:
+                self.scale((1 / 1.5), (1 / 1.5))
 
     def run(self) -> None:
         pg.init()
         display = (580, 580)
         pg.display.set_mode(display, DOUBLEBUF | OPENGL)
-
-        gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
-
-        glTranslatef(0.0, 0.0, -5)
-
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
