@@ -161,7 +161,6 @@ class Drawer:
             glClearColor(1, 1, 1, 1)
             self.display()
             pg.display.flip()
-            pg.time.wait(10)
 
 
 def main():
