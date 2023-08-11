@@ -13,10 +13,6 @@ SCREEN_HEIGHT = 600
 
 class Drawer:
     def __init__(self) -> None:
-        # glutInit()
-        # glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
-        # glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT)
-        # glutCreateWindow("Brazilian Flag")
         self.green_background_vertexes = [
             [-0.5, -0.5, 1],
             [-0.5, 0.5, 1],
