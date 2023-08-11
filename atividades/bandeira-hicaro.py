@@ -4,6 +4,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import numpy
+import pygame as pg
+from pygame.locals import *
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -11,12 +13,10 @@ SCREEN_HEIGHT = 600
 
 class Drawer:
     def __init__(self) -> None:
-        # TODO: add to separate init function
-        glutInit()
-        glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
-        glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT)
-        glutCreateWindow("Brazilian Flag")
-
+        # glutInit()
+        # glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+        # glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT)
+        # glutCreateWindow("Brazilian Flag")
         self.green_background_vertexes = [
             [-0.5, -0.5, 1],
             [-0.5, 0.5, 1],
@@ -32,11 +32,6 @@ class Drawer:
 
     def draw_flag(self):
         glBegin(GL_QUADS)
-
-        # self.translate(2, 3)
-        self.scale(1.5, 1.5)
-        self.rotate(45)
-
         self._draw_green_background()
         self._draw_yellow_diamond()
         glEnd()
@@ -69,7 +64,7 @@ class Drawer:
         rotation_matrix = [
             [math.cos(degrees), math.sin(degrees), 0],
             [-math.sin(degrees), math.cos(degrees), 0],
-            [0, 0, 0],
+            [0, 0, 1],
         ]
 
         if counterclockwise:
@@ -133,10 +128,45 @@ class Drawer:
         self.draw_flag()
         glFlush()
 
+    def handle_key_down(self, key_pressed):
+        match key_pressed:
+            case pg.K_LEFT:
+                self.translate(-1, 0)
+            case pg.K_UP:
+                self.translate(0, 1)
+            case pg.K_DOWN:
+                self.translate(0, -1)
+            case pg.K_RIGHT:
+                self.translate(1, 0)
+            case pg.K_SPACE:
+                self.rotate(2)
+            case pg.K_LCTRL:
+                self.scale(1.5, 1.5)
+            case pg.K_MINUS:
+                self.scale(-1.5, -1.5)
+
     def run(self) -> None:
-        glutDisplayFunc(self.display)
-        glClearColor(1, 1, 1, 1)
-        glutMainLoop()
+        pg.init()
+        display = (580, 580)
+        pg.display.set_mode(display, DOUBLEBUF | OPENGL)
+
+        gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
+
+        glTranslatef(0.0, 0.0, -5)
+
+        while True:
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    quit()
+                if event.type == pg.KEYDOWN:
+                    self.handle_key_down(event.key)
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+            glClearColor(1, 1, 1, 1)
+            self.display()
+            pg.display.flip()
+            pg.time.wait(10)
 
 
 def main():
